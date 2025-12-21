@@ -1,0 +1,10 @@
+,Value
+Entries (last 30d),20.0
+Entries (last 90d),51.0
+Overdue Count,1436.0
+Overdue Percent,99.58
+LeadTime median (days),21.0
+LeadTime p90 (days),181.0
+Ransomware=True,300.0
+Ransomware=False,1142.0
+Ransomware=NA,0.0

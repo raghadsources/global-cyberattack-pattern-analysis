@@ -1,0 +1,18 @@
+
+<h2>CISA KEV – Exploratory Data Analysis</h2>
+<div><img src='../figures/sb_year_added.png' style='max-width:800px;width:100%'></div><div><img src='../figures/sb_top_vendors.png' style='max-width:800px;width:100%'></div><div><img src='../figures/sb_lead_time.png' style='max-width:800px;width:100%'></div><div><img src='../figures/timeline_by_month.png' style='max-width:800px;width:100%'></div><div><img src='../figures/top_vendors.png' style='max-width:800px;width:100%'></div><div><img src='../figures/top_products.png' style='max-width:800px;width:100%'></div><div><img src='../figures/cve_year_distribution.png' style='max-width:800px;width:100%'></div><div><img src='../figures/ransomware_flag.png' style='max-width:800px;width:100%'></div>
+<pre style="white-space:pre-wrap">
+ Interpretation & Security Context
+
+- Temporal Trend: Dataset spans 2002–2025 with peak reporting in 2021.
+  This suggests concentration of disclosure activity and possible coordination around patch cycles.
+
+- Vendor Exposure:Microsoft tops the list with 346 entries,
+  reflecting the outsized impact of widely deployed platforms on enterprise risk posture.
+
+- Remediation Timing: Median lead-time (add→due) ≈ 21 days,
+  indicating typical remediation windows of ~1–2 months; adjust SLAs for critical CVEs accordingly.
+
+- Operational Note: Validate negative/very short lead-times; they often arise from retroactive
+  updates or pre-assigned CVEs, which can skew SLA analytics if not handled explicitly.
+</pre>

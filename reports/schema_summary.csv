@@ -1,0 +1,15 @@
+,dtype,missing,unique
+cveID,object,0,1442
+cveYear,Int64,0,23
+vendorProject,object,0,238
+product,object,0,584
+vulnerabilityName,object,0,1132
+dateAdded,datetime64[ns],0,340
+dueDate,datetime64[ns],0,360
+shortDescription,object,0,1358
+requiredAction,object,0,38
+knownRansomwareCampaignUse,boolean,0,2
+notes,object,0,1442
+cwes,object,161,unhashable
+days_to_due,int64,0,360
+is_overdue,bool,0,2
