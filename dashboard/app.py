@@ -1,5 +1,7 @@
+# =========================================================
 # Global Cyberattack Pattern Analysis — Dashboard
-# Author: Raghad
+# Author: Raghad Ali
+# =========================================================
 
 import streamlit as st
 import pandas as pd
@@ -94,13 +96,19 @@ ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT.parent / "data" / "cisa_kev.csv"
 FIGURES = ROOT.parent / "figures"
 
+#  Data Loading (Safe & Cached)
 @st.cache_data
-def load_data(path):
-    return pd.read_csv(path, low_memory=False)
+def load_data(path: Path) -> pd.DataFrame:
+    try:
+        return pd.read_csv(path, low_memory=False)
+    except Exception as e:
+        st.error("❌ Failed to load dataset. Please check that the data file exists and is valid.")
+        st.stop()
 
-df = load_data(DATA_PATH)
+with st.spinner("Loading dataset..."):
+    df = load_data(DATA_PATH)
 
-# ----------------------------- Helpers -----------------------------
+#  Helpers 
 def kpi_card(title, value):
     st.markdown(f"""
     <div class="e-card">
@@ -118,7 +126,7 @@ def show_figure(filename, caption, description=None):
     else:
         st.info(f"`{filename}` not generated yet (run the notebook).")
 
-# ============================= EDA =============================
+#  EDA 
 if menu == "EDA Overview":
     st.subheader("Exploratory Data Analysis")
     st.caption("High-level overview of vulnerability volume, vendors, and products.")
@@ -165,7 +173,7 @@ if menu == "EDA Overview":
         "Products with the highest number of critical vulnerabilities."
     )
 
-# ============================= MODELING =============================
+#  MODELING 
 elif menu == "Modeling Results":
     st.subheader("Machine Learning Results")
     st.caption("Supervised models trained to classify vulnerability characteristics.")
@@ -182,7 +190,7 @@ elif menu == "Modeling Results":
         "The dashboard displays final evaluation metrics only."
     )
 
-# ============================= CLUSTERING =============================
+#  CLUSTERING 
 elif menu == "Clustering Insights":
     st.subheader("Clustering Insights")
     st.caption("Unsupervised clustering to identify similarity patterns across vendors and time.")
@@ -201,7 +209,7 @@ elif menu == "Clustering Insights":
             "Temporal distribution of vulnerabilities within clusters."
         )
 
-# ============================= ASSOCIATION RULES =============================
+#  ASSOCIATION RULES 
 elif menu == "Association Rules":
     st.subheader("Association Rule Mining")
     st.caption("Frequent co-occurrence patterns across vendors and months.")
@@ -220,7 +228,7 @@ elif menu == "Association Rules":
             "Normalized monthly distribution by vendor."
         )
 
-# ============================= TRENDS =============================
+#  TRENDS 
 elif menu == "Trends & Forecast":
     st.subheader("Temporal Trends")
     st.caption("Long-term evolution of vulnerability disclosures.")
@@ -248,7 +256,7 @@ elif menu == "Trends & Forecast":
     st.subheader("Forecast (Planned)")
     st.caption("Time-series forecasting using Prophet or LSTM will be added in a future release.")
 
-
+#  Footer 
 st.markdown("""
 <hr style="margin-top: 50px; margin-bottom: 15px; border: none; border-top: 1px solid #e5e7eb;">
 <p style="
