@@ -1,5 +1,5 @@
 # Global Cyberattack Pattern Analysis — Dashboard
-# Author: Raghad
+# Author: Raghad Ali
 
 import streamlit as st
 import pandas as pd
@@ -14,8 +14,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ----------------------------- Theme Toggle -----------------------------
-dark_mode = st.toggle("🌙 Dark Mode", value=True)
+# ----------------------------- Dark Mode Toggle (no emoji) -----------------------------
+dark_mode = st.toggle("Dark Mode", value=True)
 
 def theme_css(dark=True):
     if dark:
@@ -76,8 +76,13 @@ def theme_css(dark=True):
 
 st.markdown(theme_css(dark_mode), unsafe_allow_html=True)
 
-# ----------------------------- Data Load -----------------------------
-DATA_PATH = Path("data/kev_clean.csv")
+# ----------------------------- Data Load (FIXED) -----------------------------
+DATA_PATH = Path("data/cisa_kev_clean.csv")
+
+if not DATA_PATH.exists():
+    st.error("Data file not found. Please check the data folder.")
+    st.stop()
+
 df = pd.read_csv(DATA_PATH)
 
 # ----------------------------- Sidebar -----------------------------
@@ -152,6 +157,8 @@ if section == "EDA Overview":
     fig, ax = plt.subplots(figsize=(10, 4))
     df["cve_year"].value_counts().sort_index().plot(kind="bar", ax=ax)
     ax.set_title("Distribution by CVE Year")
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Count")
     st.pyplot(fig)
 
 # ----------------------------- Modeling -----------------------------
